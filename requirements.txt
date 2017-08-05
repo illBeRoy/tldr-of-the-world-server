@@ -1,3 +1,4 @@
 flask
 wikiquote
 requests
+bencode
