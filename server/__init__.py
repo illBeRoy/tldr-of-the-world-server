@@ -4,6 +4,7 @@ import flask
 from .endpoint import HTTP_METHODS, Endpoint
 from .parsers import BodyParser, HeadersParser, QuerystringParser
 from .exception import RestfulException
+from .context import Context
 
 
 class Server(object):
@@ -12,18 +13,27 @@ class Server(object):
         self._app = flask.Flask(*args, **kwargs)
         self._app.errorhandler(404)(functools.partial(self._error_handler, 404, 'not found'))
         self._endpoints_count = 0
+        self._context = Context()
 
     def run(self, port, debug=False):
         self._app.run('0.0.0.0', port, debug)
 
     def use(self, cls):
-        for method in HTTP_METHODS:
-            self._app.add_url_rule(cls.url,
-                                   'endpoint.{0}'.format(self._endpoints_count),
-                                   view_func=functools.partial(self._endpoint_handler, cls, method),
-                                   methods=[method])
+        if isinstance(cls, list):
+            for endpoint in cls:
+                self.use(endpoint)
 
-            self._endpoints_count += 1
+        else:
+            for method in HTTP_METHODS:
+                self._app.add_url_rule(cls.url,
+                                       'endpoint.{0}'.format(self._endpoints_count),
+                                       view_func=functools.partial(self._endpoint_handler, cls, method),
+                                       methods=[method])
+
+                self._endpoints_count += 1
+
+    def set_context(self, attribute_name, context_value):
+        setattr(self._context, attribute_name, context_value)
 
     def _endpoint_handler(self, endpoint_cls, method, **uri_params):
         request = flask.request
@@ -32,6 +42,7 @@ class Server(object):
             # create instance and attach fields
             endpoint_instance = endpoint_cls()
             endpoint_instance.request = request
+            endpoint_instance.context = self._context
 
             # run endpoint handler
             response = getattr(endpoint_instance, method)(**uri_params)

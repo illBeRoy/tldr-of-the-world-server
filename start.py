@@ -1,8 +1,13 @@
 import server
-import endpoints.people.suggestions
+import context
+import endpoints.people
 
 
 if __name__ == '__main__':
     app = server.Server(__name__)
-    app.use(endpoints.people.suggestions.Endpoint)
+
+    app.set_context('proximity_graph', context.proximity_graph)
+    app.set_context('names', context.names)
+
+    app.use(endpoints.people.all)
     app.run(3000)
