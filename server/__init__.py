@@ -14,6 +14,7 @@ class Server(object):
         self._app.errorhandler(404)(functools.partial(self._error_handler, 404, 'not found'))
         self._endpoints_count = 0
         self._context = Context()
+        self._middlewares = []
 
     def run(self, port, debug=False):
         self._app.run('0.0.0.0', port, debug)
@@ -34,6 +35,9 @@ class Server(object):
 
     def set_context(self, attribute_name, context_value):
         setattr(self._context, attribute_name, context_value)
+
+    def use_middleware(self, middleware):
+        self._middlewares.append(middleware)
 
     def _endpoint_handler(self, endpoint_cls, method, **uri_params):
         request = flask.request
@@ -59,7 +63,12 @@ class Server(object):
             return self._error_handler(500, str(err), err)
 
     def _error_handler(self, status, message, err=None):
-        return flask.jsonify({'status': status, 'message': message}), status
+        response = flask.make_response((flask.jsonify({'status': status, 'message': message}), status))
+
+        for middleware in self._middlewares:
+            middleware(response)
+
+        return response
 
     def _render_response(self, response):
         if isinstance(response, tuple):
@@ -68,5 +77,10 @@ class Server(object):
             response = tuple(response)
         else:
             response = flask.jsonify(response)
+
+        response = flask.make_response(response)
+
+        for middleware in self._middlewares:
+            middleware(response)
 
         return response
