@@ -1,4 +1,5 @@
 import os.path
+import random
 
 
 class Names(object):
@@ -25,5 +26,8 @@ class Names(object):
                 break
 
         return suggestions
+
+    def random(self, count):
+        return [name for index, name in random.choices(self._names['official'], k=count)]
 
 names = Names(os.path.join(os.path.dirname(__file__), '..', '..', 'assets'))
