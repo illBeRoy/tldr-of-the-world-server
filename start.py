@@ -10,4 +10,4 @@ if __name__ == '__main__':
     app.set_context('names', context.names)
 
     app.use(endpoints.people.all)
-    app.run(3000)
+    app.run(3001)

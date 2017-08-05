@@ -3,8 +3,7 @@ import server
 
 class Endpoint(server.Endpoint):
 
-    url = '/people/search/<name>'
+    url = '/people/search/<query>'
 
-    def get(self, name):
-        name = name.lower()
-        return self.context.names.find(name, 10)
+    def get(self, query):
+        return self.context.names.find(query, 10)
