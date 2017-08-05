@@ -56,7 +56,7 @@ class Server(object):
 
         except Exception as err:
             # return rendered exception with 500
-            return self._error_handler(500, err.message, err)
+            return self._error_handler(500, str(err), err)
 
     def _error_handler(self, status, message, err=None):
         return flask.jsonify({'status': status, 'message': message}), status
