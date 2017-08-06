@@ -1,6 +1,6 @@
 import server
 import context
-import endpoints.people
+import endpoints
 import middlewares.cors
 
 
@@ -9,8 +9,10 @@ if __name__ == '__main__':
 
     app.set_context('proximity_graph', context.proximity_graph)
     app.set_context('names', context.names)
+    app.set_context('group_enrich', context.group_enrich)
+    app.set_context('feed', context.feed)
 
     app.use_middleware(middlewares.cors.middleware)
 
-    app.use(endpoints.people.all)
+    app.use(endpoints.all)
     app.run(3001)

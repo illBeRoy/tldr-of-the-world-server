@@ -1,4 +1,5 @@
 import os
+import os.path
 import sqlite3
 import pickle
 import time
@@ -8,9 +9,9 @@ import utils.quotes
 
 
 class Feed(object):
-    def __init__(self, feeds_file='feeds.sqlite'):
-        self._quotes_client = utils.quotes.Quotes()
-        self._conn = self._initialize_feeds_file(feeds_file)
+    def __init__(self, cache_dir='cache'):
+        self._quotes_client = utils.quotes.Quotes(cache_file=os.path.join(cache_dir, 'quotes.cache.sqlite'))
+        self._conn = self._initialize_feeds_file(os.path.join(cache_dir, 'feeds.cache.sqlite'))
 
     def get_feed_id(self, seed):
         return self._create_feed_id(seed)
