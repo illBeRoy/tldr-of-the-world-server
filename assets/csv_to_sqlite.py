@@ -18,8 +18,9 @@ class CsvToSqlite(object):
             # skip first row (headings)
             row = next(reader)
 
+            already_in = []
             for row in reader:
-                wipiquote_name = row[23]
+                wikiquote_name = row[23]
                 wikipedia_names = row[24]
                 occupation = row[13]
                 industry = row[14]
@@ -31,8 +32,19 @@ class CsvToSqlite(object):
                 countryName = row[5]
                 birthcity = row[3]
 
-                # TODO: replace next line with the insert we really need
-                cur.execute('INSERT INTO quotes (person, i, content) VALUES (?, ?, ?)', (name, index, quote))
+                cur.execute('INSERT INTO people (wikiquotes_names,'
+                            'wikipedia_names,'
+                            'occupation,'
+                            'industry,'
+                            'domain,'
+                            'gender,'
+                            'birthyear,'
+                            'LAT,'
+                            'LON,'
+                            'countryName,'
+                            'birthcity) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+                            (wikiquote_name, wikipedia_names, occupation, industry, domain, gender, birthyear, lat,
+                             lon, countryName, birthcity))
 
             self._conn.commit()
 
