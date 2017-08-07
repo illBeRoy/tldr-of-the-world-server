@@ -4,6 +4,7 @@ import sqlite3
 import pickle
 import time
 import random
+import hashlib
 
 import utils.quotes
 
@@ -17,7 +18,14 @@ class Feed(object):
         return self._create_feed_id(seed)
 
     def get_seed_from_feed_id(self, feed_id):
-        return pickle.loads(feed_id)
+        cur = self._conn.cursor()
+
+        results = cur.execute('SELECT seed FROM feed_id_to_seed WHERE feed_id = ?',
+                                   (feed_id,)).fetchall()
+        if (len(results)) == 0:
+            raise Exception('Feed id not found in db')
+
+        return pickle.loads(results[0][0])
 
     def get_quotes(self, feed_id, start, stop):
         """
@@ -33,7 +41,7 @@ class Feed(object):
         except:
 
             # Feed not in db, need to create it
-            seed = pickle.loads(feed_id)
+            seed = self.get_seed_from_feed_id(feed_id)
             self._create_feed(seed)
             feed = self._get_feed_from_db(feed_id)
             if len(feed) < stop:
@@ -44,7 +52,7 @@ class Feed(object):
     def _get_feed_from_db(self, feed_id):
         cur = self._conn.cursor()
 
-        pickled_feed = cur.execute('SELECT feed FROM feeds WHERE id = ?',
+        pickled_feed = cur.execute('SELECT feed FROM feeds WHERE feed_id = ?',
                                    (feed_id,)).fetchall()
         if (len(pickled_feed)) == 0:
             raise Exception('Feed id not found in db')
@@ -56,6 +64,8 @@ class Feed(object):
         Create a unique feed id that is based on the seed
         """
         feed_id = pickle.dumps(sorted(seed))
+        feed_id = hashlib.md5(feed_id).hexdigest()
+        self._save_feed_id_mapping(feed_id, seed)
         return feed_id
 
     def _create_feed(self, seed):
@@ -75,7 +85,21 @@ class Feed(object):
         feed = self._shuffle_feed(feed)
 
         pickled_feed = pickle.dumps(feed)
+        self._save_feed_id_mapping(feed_id, seed)
         self._save_feed_to_db(feed_id, pickled_feed)
+
+    def _save_feed_id_mapping(self, feed_id, seed):
+        cur = self._conn.cursor()
+
+        # Check if feed mapping is already in and then save if needed:
+        try:
+            self.get_seed_from_feed_id(feed_id)
+        except:
+            seed = sorted(seed)
+            seed = pickle.dumps(seed)
+            cur.execute('INSERT INTO feed_id_to_seed (feed_id, seed) VALUES (?, ?)', (feed_id, seed))
+
+        self._conn.commit()
 
     def _shuffle_feed(self, feed):
         random.shuffle(feed)
@@ -88,7 +112,7 @@ class Feed(object):
         cur = self._conn.cursor()
 
         creation_time = int(time.time())
-        cur.execute('INSERT INTO feeds (id, feed, creation_epoc_time) VALUES (?, ?, ?)', (feed_id, feed, creation_time))
+        cur.execute('INSERT INTO feeds (feed_id, feed, creation_epoc_time) VALUES (?, ?, ?)', (feed_id, feed, creation_time))
 
         self._conn.commit()
 
@@ -104,7 +128,8 @@ class Feed(object):
             conn = sqlite3.connect(seed_file)
         else:
             conn = sqlite3.connect(seed_file)
-            conn.execute('CREATE TABLE feeds (id TEXT PRIMARY KEY, feed TEXT, creation_epoc_time INT)')
+            conn.execute('CREATE TABLE feeds (feed_id TEXT PRIMARY KEY, feed TEXT, creation_epoc_time INT)')
+            conn.execute('CREATE TABLE feed_id_to_seed (feed_id TEXT PRIMARY KEY, seed TEXT)')
 
             conn.commit()
 
