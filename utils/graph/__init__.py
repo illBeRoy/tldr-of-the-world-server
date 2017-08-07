@@ -2,7 +2,6 @@
 #       actually a vertex, and vice versa.
 
 import pickle
-import math
 
 
 class Graph(object):
