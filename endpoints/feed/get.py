@@ -15,6 +15,9 @@ class Endpoint(server.Endpoint):
         except:
             page = 0
 
+        if page < 0:
+            page = 0
+
         page_size = 30
 
         try:
