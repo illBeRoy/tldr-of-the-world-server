@@ -2,19 +2,9 @@ import wikipedia
 import sqlite3
 import requests
 
-# wikiquote_name,'
-#                             'wikipedia_name,'
-#                             'occupation,'
-#                             'industry,'
-#                             'domain,'
-#                             'gender,'
-#                             'birthyear,'
-#                             'LAT,'
-#                             'LON,'
-#                             'countryName,'
-#                             'birthcity
 
 class Biography(object):
+
     def __init__(self, people_db):
         self._db_connection = self._get_db_connection(people_db)
         self._picture_size = 200

@@ -10,6 +10,7 @@ import utils.quotes
 
 
 class Feed(object):
+
     def __init__(self, cache_dir='cache'):
         self._quotes_client = utils.quotes.Quotes(cache_file=os.path.join(cache_dir, 'quotes.cache.sqlite'))
         self._conn = self._initialize_feeds_file(os.path.join(cache_dir, 'feeds.cache.sqlite'))
@@ -17,37 +18,40 @@ class Feed(object):
     def get_feed_id(self, seed):
         return self._create_feed_id(seed)
 
+    def build_feed(self, feed_id):
+        self._get_or_create_feed(feed_id)
+
     def get_seed_from_feed_id(self, feed_id):
         cur = self._conn.cursor()
 
         results = cur.execute('SELECT seed FROM feed_id_to_seed WHERE feed_id = ?',
                                    (feed_id,)).fetchall()
         if (len(results)) == 0:
-            raise Exception('Feed id not found in db')
+            raise Exception('Seed id not found in db')
 
         return pickle.loads(results[0][0])
 
     def get_quotes(self, feed_id, start, stop):
+        feed = self._get_or_create_feed(feed_id)
+        return feed[start:stop]
+
+    def _get_or_create_feed(self, feed_id):
         """
         returns a list of quotes from feed_id, starting at start, ending at stop (includes)
         """
-
         try:
             feed = self._get_feed_from_db(feed_id)
-            if len(feed) < stop:
-                return feed[start:]
-            else:
-                return feed[start:stop]
-        except:
 
+        except:
             # Feed not in db, need to create it
             seed = self.get_seed_from_feed_id(feed_id)
             self._create_feed(seed)
+
+            # get feed that was created
             feed = self._get_feed_from_db(feed_id)
-            if len(feed) < stop:
-                return feed[start:]
-            else:
-                return feed[start:stop]
+
+        return feed
+
 
     def _get_feed_from_db(self, feed_id):
         cur = self._conn.cursor()

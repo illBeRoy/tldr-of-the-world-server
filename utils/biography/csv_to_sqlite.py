@@ -1,3 +1,4 @@
+# Script used for transferring the pantheon csv dataset into an sqlite db
 import os
 import sqlite3
 import csv

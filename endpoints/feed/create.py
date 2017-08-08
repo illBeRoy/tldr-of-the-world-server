@@ -1,5 +1,3 @@
-import math
-
 import server
 
 
@@ -13,7 +11,7 @@ class Endpoint(server.Endpoint):
         args = parser.parse_args()
 
         if not 5 <= len(args.people) <= 30:
-            raise server.RestfulException(400, 'List of people should contain between 5 and 50 names')
+            raise server.RestfulException(400, 'List of people should contain between 5 and 30 names')
 
         for name in args.people:
             if not isinstance(name, str):
@@ -25,5 +23,7 @@ class Endpoint(server.Endpoint):
         seed = self.context.group_enrich.enrich_group(args.people, 30)
 
         feed_id = self.context.feed.get_feed_id(seed)
+
+        self.context.feed.build_feed(feed_id)
 
         return feed_id
