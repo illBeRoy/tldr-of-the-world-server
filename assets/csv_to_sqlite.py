@@ -32,8 +32,8 @@ class CsvToSqlite(object):
                 countryName = row[5]
                 birthcity = row[3]
 
-                cur.execute('INSERT INTO people (wikiquotes_names,'
-                            'wikipedia_names,'
+                cur.execute('INSERT INTO people (wikiquote_name,'
+                            'wikipedia_name,'
                             'occupation,'
                             'industry,'
                             'domain,'
@@ -56,8 +56,8 @@ class CsvToSqlite(object):
             conn = sqlite3.connect(sqlite_path)
         else:
             conn = sqlite3.connect(sqlite_path)
-            conn.execute('CREATE TABLE people (wikiquotes_names TEXT PRIMARY KEY,'
-                         'wikipedia_names TEXT,'
+            conn.execute('CREATE TABLE people (wikiquote_name TEXT PRIMARY KEY,'
+                         'wikipedia_name TEXT,'
                          'occupation TEXT,'
                          'industry TEXT,'
                          'domain TEXT,'
