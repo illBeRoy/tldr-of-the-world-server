@@ -22,7 +22,7 @@ class Endpoint(server.Endpoint):
 
         seed = self.context.group_enrich.enrich_group(args.people, 30)
 
-        feed_id = self.context.feed.get_feed_id(seed)
+        feed_id = self.context.feed.get_feed_id(args.people, seed)
 
         self.context.feed.build_feed(feed_id)
 

@@ -15,8 +15,13 @@ class Feed(object):
         self._quotes_client = utils.quotes.Quotes(cache_file=os.path.join(cache_dir, 'quotes.cache.sqlite'))
         self._conn = self._initialize_feeds_file(os.path.join(cache_dir, 'feeds.cache.sqlite'))
 
-    def get_feed_id(self, seed):
-        return self._create_feed_id(seed)
+    def get_feed_id(self, seed_core, seed):
+        """
+        :param seed_core: The people that are the "core" of the seed
+        :param seed: The entire list of people
+        :return:
+        """
+        return self._create_feed_id(seed_core, seed)
 
     def build_feed(self, feed_id):
         self._get_or_create_feed(feed_id)
@@ -44,14 +49,13 @@ class Feed(object):
 
         except:
             # Feed not in db, need to create it
-            seed = self.get_seed_from_feed_id(feed_id)
-            self._create_feed(seed)
+            seed_core, seed = self.get_seed_from_feed_id(feed_id)
+            self._create_feed(seed_core, seed)
 
             # get feed that was created
             feed = self._get_feed_from_db(feed_id)
 
         return feed
-
 
     def _get_feed_from_db(self, feed_id):
         cur = self._conn.cursor()
@@ -63,30 +67,35 @@ class Feed(object):
 
         return pickle.loads(pickled_feed[0][0])
 
-    def _create_feed_id(self, seed):
+    def _create_feed_id(self, seed_core, seed):
         """
         Create a unique feed id that is based on the seed
         """
-        feed_id = pickle.dumps(sorted(seed))
+        seed_core = sorted(seed_core)
+        seed = sorted(seed)
+        feed_id = pickle.dumps((seed_core, seed))
         feed_id = hashlib.md5(feed_id).hexdigest()
-        self._save_feed_id_mapping(feed_id, seed)
+        self._save_feed_id_mapping(feed_id, (seed_core, seed))
         return feed_id
 
-    def _create_feed(self, seed):
+    def _create_feed(self, seed_core, seed):
         """
         Create a feed according to a given seed
         :param seed: list of people
         """
         seed = sorted(seed)
-        feed_id = self._create_feed_id(seed)
-        feed = []
+        seed_core = sorted(seed_core)
+        feed_id = self._create_feed_id(seed_core, seed)
+        feed = {}
 
         for person in seed:
             quotes = self._quotes_client.quotes(person)
+            person_quotes = []
             for quote in quotes:
-                feed.append((quote, person))
+                person_quotes.append(quote)
+            feed[person] = person_quotes
 
-        feed = self._shuffle_feed(feed)
+        feed = self._feed_builder(feed, seed_core, seed)
 
         pickled_feed = pickle.dumps(feed)
         self._save_feed_id_mapping(feed_id, seed)
@@ -99,15 +108,68 @@ class Feed(object):
         try:
             self.get_seed_from_feed_id(feed_id)
         except:
-            seed = sorted(seed)
             seed = pickle.dumps(seed)
             cur.execute('INSERT INTO feed_id_to_seed (feed_id, seed) VALUES (?, ?)', (feed_id, seed))
 
         self._conn.commit()
 
-    def _shuffle_feed(self, feed):
-        random.shuffle(feed)
-        return feed
+    def _feed_builder(self, feed, seed_core, seed):
+        non_core = set(seed)
+        non_core = non_core.difference(seed_core)
+        non_core = list(non_core)
+
+        final_feed = []
+        first_ten = True
+
+        # Every 10 quotes will be 6 core, 4 non-core. until no more of one kind is left.
+        while len(non_core) + len(seed_core) != 0:
+            chosen_core = []
+            chosen_non_core = []
+
+            partial_quotes = []
+            for i in range(0, 10, 1):
+                if i <= 5 and len(seed_core):
+                    chosen_core.append(random.choice(seed_core))
+                elif len(non_core):
+                    chosen_non_core.append(random.choice(non_core))
+
+            for person in chosen_core:
+
+                # get quote from each chosen_core person
+                if len(feed[person]) != 0:
+                    quote = random.choice(feed[person])
+                    feed[person].remove(quote)
+                    partial_quotes.append((quote, person))
+                else:
+
+                    # if not more quotes left for this person, delete him from the seed_core list
+                    try:
+                        seed_core.remove(person)
+                    except:
+                        pass
+
+            # same for non_core:
+            for person in chosen_non_core:
+                if len(feed[person]) != 0:
+                    quote = random.choice(feed[person])
+                    feed[person].remove(quote)
+                    partial_quotes.append((quote, person))
+                else:
+                    try:
+                        non_core.remove(person)
+                    except:
+                        pass
+
+            # don't shuffle first ten quotes
+            if first_ten:
+                first_ten = False
+            else:
+                random.shuffle(partial_quotes)
+
+            for quote in partial_quotes:
+                final_feed.append(quote)
+
+        return final_feed
 
     def _save_feed_to_db(self, feed_id, feed):
         '''
@@ -119,7 +181,6 @@ class Feed(object):
         cur.execute('INSERT INTO feeds (feed_id, feed, creation_epoc_time) VALUES (?, ?, ?)', (feed_id, feed, creation_time))
 
         self._conn.commit()
-
 
     def _initialize_feeds_file(self, seed_file):
         '''
