@@ -74,7 +74,7 @@ class Biography(object):
         images = {}
         for page in pages.values():
             wikiquote_name = wikipedia_name_to_wikiquote_name[page['title']]
-            images[wikiquote_name] = page['thumbnail']['source']
+            images[wikiquote_name] = page.get('thumbnail', {}).get('source', None)
 
         return images
 
