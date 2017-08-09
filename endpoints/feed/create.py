@@ -26,4 +26,4 @@ class Endpoint(server.Endpoint):
 
         self.context.feed.build_feed(feed_id)
 
-        return {'feed_id': feed_id, 'people': seed}
+        return {'feed_id': feed_id, 'people': seed, 'following': args.people}

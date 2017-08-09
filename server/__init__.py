@@ -37,7 +37,7 @@ class Server(object):
         setattr(self._context, attribute_name, context_value)
 
     def use_middleware(self, middleware):
-        self._middlewares.append(middleware)
+        self._middlewares.append(middleware(self._app))
 
     def _endpoint_handler(self, endpoint_cls, method, **uri_params):
         request = flask.request
