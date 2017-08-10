@@ -7,7 +7,7 @@ class GroupEnrichment(object):
     def __init__(self, people_graph):
         self._people_graph = people_graph
 
-    def enrich_group(self, group, wanted_size):
+    def enrich_group(self, group, wanted_size, exclude=None):
         """
         Get a group of people and enrich (enlarge) them to the wanting size
         """
@@ -22,7 +22,7 @@ class GroupEnrichment(object):
             try:
                 name = next(neighbours[person])
 
-                while name in enriched_group:
+                while name in enriched_group or name in exclude:
                     name = next(neighbours[person])
 
                 enriched_group.append(name)

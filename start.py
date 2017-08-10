@@ -12,6 +12,7 @@ if __name__ == '__main__':
     app.set_context('group_enrich', context.group_enrich)
     app.set_context('feed', context.feed)
     app.set_context('biography', context.biography)
+    app.set_context('quotes', context.quotes)
 
     app.use_middleware(middlewares.cors.middleware)
 

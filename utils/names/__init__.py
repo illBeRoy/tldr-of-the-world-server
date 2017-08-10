@@ -9,7 +9,7 @@ class Names(object):
         self._names = {}
         self._name_index = {}
 
-        with open(os.path.join(assets_dir, 'names_wikiquote.txt'), 'r', encoding='utf-16') as f:
+        with open(os.path.join(assets_dir, 'names_wikiquote.txt'), 'r', encoding='utf-8') as f:
             self._names['wikiquote'] = list(enumerate(f.read().splitlines()))
 
         self._names['official'] = self._names['wikiquote']

@@ -20,7 +20,31 @@ class Endpoint(server.Endpoint):
             if not self.context.names.has(name):
                 raise server.RestfulException(400, 'Person "{0}" does not exist in our database'.format(name))
 
-        seed = self.context.group_enrich.enrich_group(args.people, 30)
+        # this part was added to ensure robustness - as some people in our database actually DON'T have quotes
+        people_without_quotes = set()
+
+        while True:
+
+            # create seed
+            seed = self.context.group_enrich.enrich_group(args.people, 30, exclude=people_without_quotes)
+
+            # iterate all people in seed to ensure its safety
+            seed_is_safe = True
+            for person in seed:
+                try:
+                    self.context.quotes.quotes_len(person)
+                except Exception as err:
+                    if person in args.people:
+                        raise server.RestfulException(500, 'Cannot use {0}. Our bad.'.format(person))
+
+                    print('omitting {0} from feed'.format(person))
+
+                    people_without_quotes.add(person)
+                    seed_is_safe = False
+                    break
+
+            if seed_is_safe:
+                break
 
         feed_id = self.context.feed.get_feed_id(args.people, seed)
 

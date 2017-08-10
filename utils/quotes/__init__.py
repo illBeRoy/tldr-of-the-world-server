@@ -100,7 +100,6 @@ class Quotes(object):
         except:
             raise Exception('No quotes length in cache')
 
-        print('len from db')
         return quotes_len
 
     def _save_quotes_to_cache(self, name, quotes):
