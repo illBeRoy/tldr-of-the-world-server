@@ -1,26 +1,18 @@
 # TL;DR of the World
 Part of the [TL;DR of the World](https://tlderofthe.world) academic project.  
+
 Client repository can be found [here](https://github.com/illBeRoy/famous-quote-feed-client).
 
 Whenever "graph" is mentioned in this readme it refers to [another part of the project](https://github.com/illBeRoy/famous-quote-feed-data-explorer).
 
-## About the site
-[TL;DR of the World](https://tlderofthe.world) is an attempt to literally tl;dr (too long; didn’t read) the world.
-
-We realize that during the history of the human race one of the things that were recorded are quotes of leading figures in various fields.  
-Say we want to research science fiction novels. We would like to look at the quotes of leading writers, enters tldrofthe.world!  
-The site allows you to enter names of writers you wish to follow while suggesting familiar figures to those you choose.  
-When done choosing, the site will enrich your selection with some more figures matching those you selected and generate a feed of quotes.
-
-More info can be found at the above linked repositories and the "about" on the website.
-
-
 ## Server structure
+
 ### Framework
 The site sits on a framework built by [Roy](https://github.com/illBeRoy) that warps [flask](http://flask.pocoo.org/), you can explore the framework code in the server directory.
 
 ### Endpoints
 The endpoints, which sits under the endpoints directory define the api of the server:
+
 #### Feed
 - create: expects a list of people (`core`) which will be enriched with more people to create a `seed` and then a feed created for this `seed` (and a unique `feed_id`).
 - get: expects a `feed_id` and returns the `core` and the `seed` matching the `feed_id`.
@@ -35,6 +27,7 @@ The endpoints, which sits under the endpoints directory define the api of the se
 
 ### Modules
 The server module can be found under utils directory:
+
 #### biography
 Responsible for:
 - Getting all the details  we know on people from the pentheon dataset.
@@ -73,6 +66,3 @@ The assets directory contains:
 - A file with all the names we support.
 - A csv that contains all the pentheon details for the names we support + mapping to wikiquote and wikipedia names.
 - An sqlite db that was created with the csv fields.
-
-## Notes
-The project uses the great [pantheon](http://pantheon.media.mit.edu/) dataset.
