@@ -89,11 +89,7 @@ class Feed(object):
         feed = {}
 
         for person in seed:
-            quotes = self._quotes_client.quotes(person)
-            person_quotes = []
-            for quote in quotes:
-                person_quotes.append(quote)
-            feed[person] = person_quotes
+            feed[person] = self._quotes_client.quotes(person)
 
         feed = self._feed_builder(feed, seed_core, seed)
 

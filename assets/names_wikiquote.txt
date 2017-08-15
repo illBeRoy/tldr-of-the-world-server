@@ -97,8 +97,8 @@ Björn Ulvaeus
 Benny Andersson
 Bill Gates
 Brigitte Bardot
-"Bernard Montgomery
-"Benjamin Disraeli
+Bernard Montgomery, 1st Viscount Montgomery of Alamein
+Benjamin Disraeli
 Susan B. Anthony
 Bram Stoker
 Benoît Mandelbrot
@@ -185,7 +185,7 @@ Doris Day
 David Hilbert
 David Letterman
 David Ricardo
-"Arthur Wellesley
+Arthur Wellesley, 1st Duke of Wellington
 Diego Maradona
 David Brewster
 Dmitri Shostakovich
@@ -241,7 +241,7 @@ Edward VI of England
 Enrico Fermi
 Enver Hoxha
 Hirohito
-"Louis Mountbatten
+Louis Mountbatten, 1st Earl Mountbatten of Burma
 Edgar Allan Poe
 Edward Gibbon
 E. O. Wilson
@@ -333,7 +333,7 @@ Gro Harlem Brundtland
 Henry Ford
 Henryk Sienkiewicz
 Heinrich Himmler
-"Horace Walpole
+Horace Walpole
 H. G. Wells
 Hippocrates
 Hermann Göring
@@ -543,7 +543,7 @@ John Belushi
 Leonardo da Vinci
 Rosie O'Donnell
 Louis Armstrong
- 3rd Baron Rayleigh"
+John Strutt, 3rd Baron Rayleigh
 Lactantius
 Lavrentiy Beria
 Leopold von Sacher-Masoch
@@ -586,7 +586,7 @@ Nicole Richie
 Marsilio Ficino
 Mike Oldfield
 Morihei Ueshiba
-"Martin Luther King
+Martin Luther King, Jr.
 M. C. Escher
 Marcus Aurelius
 Marina Tsvetaeva
@@ -596,7 +596,7 @@ Marie Curie
 Martin Gardner
 Mohamed Atta
 Morgan Freeman
- Queen of Scots"
+Mary, Queen of Scots
 Martin Bormann
 Michael Atiyah
 Mary I of England
@@ -668,7 +668,7 @@ Pope Boniface VIII
 Peter Handke
 Pope Pius II
 Protagoras
-"Diana
+Diana, Princess of Wales
 Paul of Tarsus
 Plautus
 Pablo Picasso
@@ -846,14 +846,14 @@ William Morris
 Woody Guthrie
 Wisława Szymborska
 William Henry Harrison
-"William Thomson
+William Thomson
 William McKinley
 William Howard Taft
 Woodrow Wilson
 Cliff Burton
 William S. Burroughs
 William of Ockham
-"William Pitt
+William Pitt, 1st Earl of Chatham
 William Butler Yeats
 Walter Raleigh
 William Faulkner
@@ -926,7 +926,7 @@ John D. Carmack
 Plotinus
 Imre Lakatos
 Natalie Portman
-"Princess Margaret
+Princess Margaret, Countess of Snowdon
 Sergio Leone
 Ted Kennedy
 Georgy Zhukov
@@ -1012,7 +1012,7 @@ Thomas à Kempis
 Eliza Dushku
 T. E. Lawrence
 Karel Čapek
-"William Lamb
+William Lamb, 2nd Viscount Melbourne
 Edith Stein
 Teresa of Ávila
 John Herschel
@@ -1131,7 +1131,7 @@ Irvine Welsh
 Shimon Peres
 Samuel Johnson
 Douglas MacArthur
-"Thomas Cromwell
+Thomas Cromwell, 1st Earl of Essex
 Henri Poincaré
 Hugo Chávez
 Tiger Woods
@@ -1215,7 +1215,7 @@ George Sand
 Kate Winslet
 Robert Burns Woodward
 James Hetfield
-"""Weird Al"" Yankovic"
+"Weird Al" Yankovic
 Aleksandr Pushkin
 Christopher Wren
 Muammar Gaddafi
@@ -1298,7 +1298,7 @@ Margrethe II of Denmark
 Friedensreich Hundertwasser
 Judas Iscariot
 Pope Pius X
-"Alfred Tennyson
+Alfred, Lord Tennyson
 John Dryden
 Nico
 Charles Bukowski
@@ -1324,7 +1324,7 @@ Jean-Luc Godard
 Dmitri Mendeleev
 Lucy Maud Montgomery
 Hatshepsut
-"Robert Baden-Powell
+Robert Baden-Powell
 Larry Page
 Sergey Brin
 Gerardus Mercator
@@ -1344,7 +1344,7 @@ Amedeo Modigliani
 Pierre Beaumarchais
 Simone de Beauvoir
 Man Ray
-"Prince Philip
+Prince Philip, Duke of Edinburgh
 Jean-Paul Marat
 J. B. S. Haldane
 A. P. J. Abdul Kalam
@@ -1463,7 +1463,7 @@ Cyrano de Bergerac
 Robert Southey
 Alexander von Humboldt
 Alfred Binet
-"Charles V
+Charles V, Holy Roman Emperor
 Larry Flynt
 Idi Amin
 Hafez al-Assad
@@ -1475,7 +1475,7 @@ Vyacheslav Molotov
 Johnny Depp
 Paul Walker
 J. M. W. Turner
-"Prince William
+Prince William, Duke of Cambridge
 Otto Skorzeny
 Marvin Minsky
 Alexander Alekhine
@@ -1489,7 +1489,7 @@ Zhang Ziyi
 Gabriel Fauré
 Bruno Bauer
 Frank Miller
-"Mary
+Mary, mother of Jesus
 Edmund Hillary
 Milton Friedman
 William the Silent
@@ -1678,7 +1678,7 @@ Stefan Zweig
 Josemaría Escrivá
 Washington Irving
 Michael Ende
-"Robert Lucas
+Robert Lucas Jr.
 Isabelle Adjani
 Christina Applegate
 Arrian
@@ -1690,7 +1690,7 @@ Jacques Prévert
 Giorgio Vasari
 Thomas Eakins
 Henry Cavendish
- Jr."
+John Forbes Nash, Jr.
 Tina Fey
 Robert Oppenheimer
 William F. Sharpe
@@ -1727,8 +1727,8 @@ Claude Joseph Rouget de Lisle
 John Rawls
 The Edge
 Billy Joel
-"Anne
-"Charles
+Anne, Princess Royal
+Charles, Prince of Wales
 Mark Rothko
 Hans Frank
 Thomas Carlyle
@@ -1834,7 +1834,7 @@ John Dolmayan
 Dante Gabriel Rossetti
 Axl Rose
 George Foreman
-"Ferdinand I
+Ferdinand I, Holy Roman Emperor
 Hu Jintao
 Hugh Laurie
 Philip Roth
@@ -1868,12 +1868,12 @@ Titian
 Georges Danton
 Mark Twain
 Jane Fonda
-"Henry Temple
+Henry Temple, 3rd Viscount Palmerston
 Diana Ross
 Will Smith
 Comte de Lautréamont
 Alfred de Vigny
-"Rainier III
+Rainier III, Prince of Monaco
 Aristotle Onassis
 Arthur Rimbaud
 Hans Blix
@@ -1885,8 +1885,8 @@ Ma Ying-jeou
 Truman Capote
 Sigourney Weaver
 Bill Evans
-"Anne Robert Jacques Turgot
-"Gilbert du Motier
+Anne Robert Jacques Turgot
+Gilbert du Motier, Marquis de Lafayette
 Alexander Lukashenko
 Alexandre Dumas
 Isaiah Berlin
@@ -2016,7 +2016,7 @@ Ben Stiller
 Alan Sillitoe
 William James
 Gwyneth Paltrow
-"John Russell
+John Russell, 1st Earl Russell
 John Gielgud
 Peter Ustinov
 Aleksis Kivi
@@ -2037,7 +2037,7 @@ Luis Buñuel
 Gloria Estefan
 Max Delbrück
 Eugène Delacroix
-"George Curzon
+George Curzon, 1st Marquess Curzon of Kedleston
 Leonardo DiCaprio
 Robert C. Merton
 José Raúl Capablanca
@@ -2368,12 +2368,12 @@ Jean Baudrillard
 Giacomo Casanova
 Austen Chamberlain
 Giuseppe Tomasi di Lampedusa
-"Charles Grey
-"Robert Cecil
+Charles Grey, 2nd Earl Grey
+Robert Gascoyne-Cecil, 3rd Marquess of Salisbury
 Mahmoud Abbas
-"Archibald Primrose
+Archibald Primrose, 5th Earl of Rosebery
 Norah Jones
-"Robert Jenkinson
+Robert Jenkinson, 2nd Earl of Liverpool
 Rocky Marciano
 Valmiki
 Diogenes of Sinope
@@ -2532,8 +2532,8 @@ Yasunari Kawabata
 Kalidasa
 Alfred Sisley
 César Franck
-"Caroline
-"Marie de Rabutin-Chantal
+Caroline, Princess of Hanover
+Marie de Rabutin-Chantal, marquise de Sévigné
 Theo van Doesburg
 Damien Hirst
 Yoweri Museveni
@@ -2630,7 +2630,7 @@ Antonio Machado
 Juan Ramón Jiménez
 John McEnroe
 Cormac McCarthy
-"Robert Cecil
+Robert Cecil, 1st Viscount Cecil of Chelwood
 Carlos Fuentes
 Jeanne Calment
 U Thant
@@ -2698,7 +2698,7 @@ Boris Berezovsky
 Julius Nyerere
 Alex Jones
 Brian Greene
-"Georges-Louis Leclerc
+Georges-Louis Leclerc, Comte de Buffon
 José de San Martín
 Thaksin Shinawatra
 Otto Lilienthal
@@ -2840,13 +2840,13 @@ Erik Erikson
 Ben Johnson (sprinter)
 Helmuth von Moltke the Elder
 Charles-Valentin Alkan
-"Princess Madeleine
+Princess Madeleine, Duchess of Hälsingland and Gästrikland
 Anne Hathaway
 Jalal Talabani
-"Mary
+Mary, Crown Princess of Denmark
 John Harsanyi
 Magnus Carlsen
-"Norman Schwarzkopf
+Norman Schwarzkopf, Jr.
 Dan Brown
 Bon Scott
 John Terry
@@ -2889,7 +2889,7 @@ Martinus J. G. Veltman
 Jack Johnson (musician)
 Joss Stone
 Ray Liotta
-"Norman Foster Ramsey
+Norman Foster Ramsey, Jr.
 Pappus of Alexandria
 Taras Shevchenko
 Mariano Rajoy
@@ -3220,7 +3220,7 @@ J. D. Salinger
 Cristina Fernández de Kirchner
 David Tennant
 Kirk Hammett
-"Catherine
+Catherine, Duchess of Cambridge
 Jean Paul
 Carlos Ruiz Zafón
 Timothy Leary
@@ -3507,7 +3507,7 @@ Liam Hemsworth
 Mohammad Reza Pahlavi
 Gore Vidal
 Alessandro Del Piero
-"Tenzin Gyatso
+Tenzin Gyatso, 14th Dalai Lama
 Oprah Winfrey
 Nick Griffin
 Percy Bysshe Shelley
@@ -3574,7 +3574,7 @@ Arsène Wenger
 James Blake
 Ellie Goulding
 Olivier Giroud
-"Horatio Nelson
+Horatio Nelson
 Bertolt Brecht
 José Rizal
 Alyson Michalka
@@ -3620,7 +3620,7 @@ Tré Cool
 Antoni Gaudí
 Saint Peter
 Mohamed Morsi
-"Joseph Smith
+Joseph Smith, Jr.
 Anders Behring Breivik
 Otis Redding
 Henry Miller

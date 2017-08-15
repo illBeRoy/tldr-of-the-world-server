@@ -52,7 +52,7 @@ class Biography(object):
         wikiquote_name_to_wikipedia_name = {wikiquote_name: self._wikiquote_name_to_wikipedia_name(wikiquote_name)
                                             for wikiquote_name in wikiquote_names}
 
-        wikipedia_name_to_wikiquote_name = {v: k for k, v in wikiquote_name_to_wikipedia_name.items()}
+        wikipedia_name_to_wikiquote_name = {v.replace('_', ' '): k for k, v in wikiquote_name_to_wikipedia_name.items()}
 
         names = ''
         for wikipedia_name in wikiquote_name_to_wikipedia_name.values():

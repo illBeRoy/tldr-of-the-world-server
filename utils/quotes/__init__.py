@@ -77,10 +77,6 @@ class Quotes(object):
         :raises: if person was not found on api
         '''
         quotes = wikiquote.quotes(name, max_quotes=max_quotes)
-
-        if len(quotes) == 0:
-            raise Exception('No records found in api')
-
         return quotes
 
     def _len_from_db(self, name):
@@ -114,7 +110,10 @@ class Quotes(object):
         for index, quote in enumerate(quotes):
             cur.execute('INSERT INTO quotes (person, i, content) VALUES (?, ?, ?)', (name, index, quote))
 
-        cur.execute('INSERT INTO people (name, quotes_len) VALUES (?, ?)', (name, len(quotes)))
+        try:
+            cur.execute('INSERT INTO people (name, quotes_len) VALUES (?, ?)', (name, len(quotes)))
+        except sqlite3.IntegrityError:
+            pass
 
         self._conn.commit()
 

@@ -14,8 +14,9 @@ class Endpoint(server.Endpoint):
             return {}
 
         people = args.names.split(',')
+        people = [name.replace('#/COMMA/', ',') for name in people]
 
         try:
             return self.context.biography.get_wikipedia_images(people)
-        except:
-            raise server.RestfulException(404, 'Could not find people specified in the request')
+        except Exception as err:
+            raise server.RestfulException(404, 'Could not find people specified in the request ({0})')
