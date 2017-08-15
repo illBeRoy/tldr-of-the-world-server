@@ -1,4 +1,4 @@
-# TL;DR of the World
+# TL;DR of the World Server
 Part of the [TL;DR of the World](https://tlderofthe.world) academic project.  
 
 Client repository can be found [here](https://github.com/illBeRoy/famous-quote-feed-client).
