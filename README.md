@@ -1,9 +1,9 @@
 # TL;DR of the World Server
 Part of the [TL;DR of the World](https://tldrofthe.world) academic project.  
 
-Client repository can be found [here](https://github.com/illBeRoy/famous-quote-feed-client).
+Client repository can be found [here](https://github.com/illBeRoy/tldr-of-the-world-client).
 
-Whenever "graph" is mentioned in this readme it refers to [another part of the project](https://github.com/illBeRoy/famous-quote-feed-data-explorer).
+Whenever "graph" is mentioned in this readme it refers to [another part of the project](https://github.com/illBeRoy/tldr-of-the-world-data).
 
 ## Server structure
 
@@ -15,7 +15,7 @@ The endpoints are the de-facto api sepcification of the server:
 
 #### Feed
 
-- `[POST] /feed`: expects a list of people (`core`) which will be enriched with more people to create an enriched `seed` group using our proximity graph (see [graphy](https://github.com/illBeRoy/famous-quote-feed-data-explorer)) and then a persistant feed is created for this `seed`, with a unique `feed_id`.
+- `[POST] /feed`: expects a list of people (`core`) which will be enriched with more people to create an enriched `seed` group using our proximity graph (see [graphy](https://github.com/illBeRoy/tldr-of-the-world-data)) and then a persistant feed is created for this `seed`, with a unique `feed_id`.
 
 - `[GET] /feed/<feed_id>`: for a given `feed_id`, returns information about said feed: seed, core group, and id for validation.
 
